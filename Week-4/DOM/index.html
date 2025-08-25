@@ -1,0 +1,42 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>DOM-1</title>
+ </head>
+ <body>
+   <script>
+    let timeout;
+    function debouncePopulateDiv(){
+      clearTimeout(timeout);
+      timeout = setTimeout(function (){
+        populateDiv();
+      } , 500);
+    }
+      function populateDiv(){
+         const num1 = document.getElementById("firstNum").value;
+         const num2 = document.getElementById("secondNum").value;
+      
+        fetch("http://localhost:3000/sum?num1=" + num1 + "&num2=" + num2)
+          .then(function(response){
+            response.text()
+              .then(function(ans){
+                document.getElementById("finalSum").innerHTML = ans;
+            })
+          })
+      }  
+      // async function populateDiv(){
+      //   const num1 = document.getElementById("firstNum").value;
+      //   const num2 = document.getElementById("secondNum").value
+      //   const response = await fetch("http://localhost:3000/sum?num1=" + num1 + "&num2=" + num2);
+      //   const ans = await response.text();
+      //   document.getElementById("finalSum").innerHTML = ans;
+      // }
+   </script>
+   <input oninput="debouncePopulateDiv()" type="text" id="firstNum" placeholder="First Number"><br><br>
+   <input oninput="debouncePopulateDiv()" type="text" id="secondNum" placeholder="Second Number"><br><br>
+   <!-- <button onclick="populateDiv()">Calculate Sum</button><br><br> -->
+   <div id="finalSum"></div>
+ </body>
+ </html>
