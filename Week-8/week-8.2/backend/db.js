@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
-mongoose.conect("mongodb://localhost:27017/");
+mongoose.connect("mongodb://localhost:27017/PayTM_APP");
 
 const userSchema = mongoose.Schema({
    username: String,
    password: String,
-   firstname: String,
-   lastname: String
+   firstName: String,
+   lastName: String
 });
 
 const User = mongoose.model("User", userSchema);

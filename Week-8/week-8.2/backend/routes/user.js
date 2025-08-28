@@ -1,22 +1,25 @@
 const express = require("express");
 
+const jwt = require("jsonwebtoken");
+
 const router = express.Router();
 
-const {User} = require("./db");
+const {User} = require("../db");
 
 const {JWT_SECRET} = require("../config");
 
 const {z} = require ("zod");
+const { authMiddleware } = require("../middleware");
 
 const signupBody = z.object({
-   usename : z.string().email(),
+   username : z.string().email(),
    firstName : z.string(),
-   lastName : z.string,
+   lastName : z.string(),
    password : z.string()
 })
 
 router.post("/signup" , async (req,res) =>{
-   const validationResponse = signupBody.safeparse(req.body);
+   const validationResponse = signupBody.safeParse(req.body);
    if (! validationResponse.success){
       return res.status(411).json({
          message : "Incorrect inputs"
@@ -36,7 +39,7 @@ router.post("/signup" , async (req,res) =>{
       username : req.body.username,
       password : req.body.password,
       firstName : req.body.firstName,
-      lastName : req.body.lastname,
+      lastName : req.body.lastName,
    })
    
    const userId = user._id;
@@ -45,7 +48,25 @@ router.post("/signup" , async (req,res) =>{
       message: "User created successfully",
       token : token
    })
-
 })
 
-module.exports()
+const updatedBody = z.object({
+   firstName: z.string().optional(),
+   lastName : z.string().optional(),
+   password: z.string().optional(),
+})
+
+router.put("/", authMiddleware , async (req, res)=>{
+   const validationResponse = updatedBody.safeParse(req.body);
+   if(!validationResponse.success){
+      res.status(411).json({
+         message : "Error while updating information"
+      })
+   }
+   await User.updateOne(req.body ,{ id : req.UserId})
+   res.json({
+      message: "updated successfully"
+   })
+} )
+
+module.exports = router
