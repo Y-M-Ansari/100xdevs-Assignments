@@ -9,8 +9,9 @@ async function insertData() {
     });
     try {
         await client.connect();
-        const insertQuery = "INSERT INTO students (name , id) VALUES ('nitish' , '1')";
-        const res = await client.query(insertQuery);
+        const insertQuery = "INSERT INTO students (name , id) VALUES ($1, $2)";
+        const values = ['Awasthi', '5'];
+        const res = await client.query(insertQuery, values);
         console.log("Insertion success", res);
     }
     catch (err) {
@@ -21,4 +22,4 @@ async function insertData() {
     }
 }
 insertData();
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=insert.js.map
