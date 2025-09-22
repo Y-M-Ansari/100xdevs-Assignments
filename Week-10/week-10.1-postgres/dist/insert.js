@@ -9,8 +9,8 @@ async function insertData() {
     });
     try {
         await client.connect();
-        const insertQuery = "INSERT INTO students (name , id) VALUES ($1, $2)";
-        const values = ['Awasthi', '5'];
+        const insertQuery = "INSERT INTO users ( username, email, password ) VALUES ($1, $2, $3)";
+        const values = ['Nitish', 'nitish@gmail.com', 'yadav'];
         const res = await client.query(insertQuery, values);
         console.log("Insertion success", res);
     }

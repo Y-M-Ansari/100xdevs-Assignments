@@ -1,5 +1,5 @@
 import { Client } from "pg";
-async function getUser(name) {
+async function getUser(username) {
     const client = new Client({
         host: 'localhost',
         port: 5432,
@@ -9,8 +9,8 @@ async function getUser(name) {
     });
     try {
         await client.connect();
-        const query = `SELECT * FROM students WHERE name = $1`;
-        const result = await client.query(query, [name]);
+        const query = `SELECT * FROM users WHERE username = $1`;
+        const result = await client.query(query, [username]);
         if (result.rows.length > 0) {
             console.log('User found :', result.rows[0]);
             return result.rows[0];
@@ -28,5 +28,7 @@ async function getUser(name) {
         await client.end();
     }
 }
-getUser('Yousuf');
+console.log(getUser('Yousuf'));
+console.log(getUser('Yousuf'));
+getUser('Yousuf').catch(console.error);
 //# sourceMappingURL=getdata.js.map

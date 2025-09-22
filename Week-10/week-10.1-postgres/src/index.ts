@@ -11,9 +11,9 @@ async function insertData(){
     });
    try{
       await client.connect();
-        const insertQuery = "INSERT INTO students (name , id) VALUES ('nitish' , '1')";
-        const res = await client.query(insertQuery);
-        console.log("Insertion success", res);
+      const insertQuery = "INSERT INTO students (name , id) VALUES ('nitish' , '1')";
+      const res = await client.query(insertQuery);
+      console.log("Insertion success", res);
    } catch(err){
       console.error('Error during the insertion' , err)
    } finally{
