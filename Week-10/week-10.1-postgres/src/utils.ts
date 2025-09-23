@@ -1,0 +1,13 @@
+import { Client } from "pg";
+
+export async function getClient(){
+   const client = new Client({
+      host : 'localhost',
+      port : 5432,
+      database : 'postgres',
+      user : 'postgres',
+      password : 'Postgres'
+   });
+   await client.connect();
+   return client;
+}
