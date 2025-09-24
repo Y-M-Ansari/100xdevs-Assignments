@@ -4,7 +4,7 @@ export async function getClient(){
    const client = new Client({
       host : 'localhost',
       port : 5432,
-      database : 'postgres',
+      database : 'DemoDB',
       user : 'postgres',
       password : 'Postgres'
    });
