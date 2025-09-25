@@ -1,1 +1,1 @@
-{"root":["./src/createtables.ts","./src/creating_table.ts","./src/get_data.ts","./src/getdata.ts","./src/index.ts","./src/insert.ts","./src/insertdata.ts","./src/utils.ts"],"version":"5.9.2"}
+{"root":["./src/createtables.ts","./src/creating_table.ts","./src/get_data.ts","./src/getdata.ts","./src/index.ts","./src/insert.ts","./src/insertdata.ts","./src/update.ts","./src/utils.ts"],"version":"5.9.2"}
